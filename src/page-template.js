@@ -61,6 +61,32 @@ const generateTeamMembers = members => {
 
 }
 
+// HTML Page
+return `
+    <!DOCTYPE html>
+    <html lang="en">
+
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Team Members</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        </head>
+
+        <body>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 mb-3 team-header bg-danger">
+                        <h1 class="text-center text-white">Team Members</h1>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>
+    `;
 
 
 

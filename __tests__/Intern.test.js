@@ -15,7 +15,7 @@ test('create Intern object', () => {
 test('gets intern school value', () => {
     const intern = new Intern('testName', '3', 'test@test.com', '2University');
 
-    expect(intern.getSchool()).toBe('School: 2University');
+    expect(intern.getSchool()).toBe('2University');
 });
 
 test('gets interns value', () => {

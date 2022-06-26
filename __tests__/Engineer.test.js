@@ -15,7 +15,7 @@ test('creates engineer object', () => {
 test('gets engineers github', () => {
     const engineer = new Engineer('testName', '3', 'test@test.com', 'testAccount');
 
-    expect(engineer.getGithub()).toBe('Github: https://github.com/testAccount')
+    expect(engineer.getGithub()).toBe('https://github.com/testAccount')
 });
 
 test('gets engineer role', () => {

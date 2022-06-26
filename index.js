@@ -3,6 +3,30 @@ const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
+const fs = require('fs');
+
+const mockDataManager = {
+        name: 'Bob',
+        id: '1',
+        email: 'test@test.com',
+        officeNumber: '100'
+}
+
+const mockDataIntern = {
+    name: 'Tom',
+    id: '20',
+    email: 'test@testschool.com',
+    school: 'Chapel Hill'
+}
+
+const mockDataEngineer = {
+    name: 'Jon',
+    id: '5',
+    email: 'test@test2.com',
+    github: 'test'
+}
+
+
 
 let teamMembers = [];
 
@@ -109,6 +133,7 @@ function promptUser() {
                 name: 'addTeamMember',
                 message: 'Do you want to add team members? '
             })
+            // if they choose to add a team member they canadd an engineer or an intern to the team
             .then(({ addTeamMember }) => {
                 if (addTeamMember) {
                     inquirer
@@ -128,7 +153,7 @@ function promptUser() {
                                 console.log(teamMembers);
                             })
                         }
-                        else if (addMemberResponse.addMemberRole === 'Intern') {
+                        if(addMemberResponse.addMemberRole === 'Intern') {
                             inquirer
                             .prompt(internQuestions)
                             .then(({ name, id, email, school }) => {
@@ -137,12 +162,46 @@ function promptUser() {
                                 console.log(teamMembers);
                             })
                         }
+                        writeFile(teamMembers);
                     })
 
                 }
                 console.log('ending because no teammate added');
-            }) 
+                writeFile(teamMembers);
+            })
         })
+
 }
+
+const writeFile = fileContent => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile('./dist/index.html', fileContent, err => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve({
+                ok: true,
+                message: 'File Created'
+            });
+        });
+    });
+};
+
+const copyFile = () => {
+    return new Promise((resolve, reject) => {
+        fs.copyFile('./src/style.css', './dist/style.css', err => {
+            if (err){
+                reject(err);
+                return;
+            }
+            resolve({
+                ok: true,
+                message: 'Stylesheet created'
+            });
+        });
+    });
+};
+
 
 initApp();

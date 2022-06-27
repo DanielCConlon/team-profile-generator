@@ -31,3 +31,5 @@ https://github.com/DanielCConlon/team-profile-generator
 https://danielcconlon.github.io/team-profile-generator/
 
 # Video demo
+
+https://watch.screencastify.com/v/YdpKAhietuZSFQLdVxDY

@@ -7,28 +7,6 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const generatePage = require('./src/page-template');
 
-const mockDataManager = {
-        name: 'Bob',
-        id: '1',
-        email: 'test@test.com',
-        officeNumber: '100'
-}
-
-const mockDataIntern = {
-    name: 'Tom',
-    id: '20',
-    email: 'test@testschool.com',
-    school: 'Chapel Hill'
-}
-
-const mockDataEngineer = {
-    name: 'Jon',
-    id: '5',
-    email: 'test@test2.com',
-    github: 'test'
-}
-
-
 let teamMembers = [];
 
 
@@ -36,25 +14,62 @@ const managerQuestions = [
     {
         type: 'input',
         name: 'name',
-        message: "What is your Manager's name? "
+        message: "What is your Manager's name? ",
+        validate: nameInput => {
+            if (nameInput) {
+                return true;
+            }
+            else {
+                console.log("Name is required!");
+                return false;
+            }
+        }
+
     },
 
     {
         type: 'input',
         name: 'id',
-        message: "What is your Manager's ID? "
+        message: "What is your Manager's ID? ",
+        validate: idInput => {
+            if (idInput) {
+                return true;
+            }
+            else {
+                console.log("ID is required!");
+                return false;
+            }
+        }
     },
 
     {
         type: 'input',
         name: 'email',
-        message: "What is your Manager's email? "
+        message: "What is your Manager's email? ",
+        validate: emailInput => {
+            if (emailInput) {
+                return true;
+            }
+            else {
+                console.log("Email is required!");
+                return false;
+            }
+        }
     },
 
     {
         type: 'input',
         name: 'officeNumber',
-        message: "What is your Manager's office number? "
+        message: "What is your Manager's office number? ",
+        validate: officeNumberInput => {
+            if (officeNumberInput) {
+                return true;
+            }
+            else {
+                console.log("Office Number is required!");
+                return false;
+            }
+        }
     }
 
 ];
@@ -64,25 +79,61 @@ const engineerQuestions = [
     {
         type: 'input',
         name: 'name',
-        message: "What is your Engineer's name? "
+        message: "What is your Engineer's name? ",
+        validate: nameInput => {
+            if (nameInput) {
+                return true;
+            }
+            else {
+                console.log("Name is required!");
+                return false;
+            }
+        }
     },
 
     {
         type: 'input',
         name: 'id',
-        message: "What is your Engineer's ID? "
+        message: "What is your Engineer's ID? ",
+        validate: idInput => {
+            if (idInput) {
+                return true;
+            }
+            else {
+                console.log("ID is required!");
+                return false;
+            }
+        }
     },
 
     {
         type: 'input',
         name: 'email',
-        message: "What is your Engineer's email? "
+        message: "What is your Engineer's email? ",
+        validate: emailInput => {
+            if (emailInput) {
+                return true;
+            }
+            else {
+                console.log("Email is required!");
+                return false;
+            }
+        }
     },
 
     {
         type: 'input',
         name: 'github',
-        message: "What is your Engineer's github? "
+        message: "What is your Engineer's github? ",
+        validate: githubInput => {
+            if (githubInput) {
+                return true;
+            }
+            else {
+                console.log("Github is required!");
+                return false;
+            }
+        }
     }
 ];
 
@@ -90,25 +141,61 @@ const internQuestions = [
     {
         type: 'input',
         name: 'name',
-        message: "What is your Intern's name? "
+        message: "What is your Intern's name? ",
+        validate: nameInput => {
+            if (nameInput) {
+                return true;
+            }
+            else {
+                console.log("Name is required!");
+                return false;
+            }
+        }
     },
 
     {
         type: 'input',
         name: 'id',
-        message: "What is your Intern's ID? "
+        message: "What is your Intern's ID? ",
+        validate: idInput => {
+            if (idInput) {
+                return true;
+            }
+            else {
+                console.log("ID is required!");
+                return false;
+            }
+        }
     },
 
     {
         type: 'input',
         name: 'email',
-        message: "What is your Intern's email? "
+        message: "What is your Intern's email? ",
+        validate: emailInput => {
+            if (emailInput) {
+                return true;
+            }
+            else {
+                console.log("Email is required!");
+                return false;
+            }
+        }
     },
 
     {
         type: 'input',
         name: 'school',
-        message: "What is your Intern's School? "
+        message: "What is your Intern's School? ",
+        validate: schoolInput => {
+            if (schoolInput) {
+                return true;
+            }
+            else {
+                console.log("The School is required!");
+                return false;
+            }
+        }
     }
 ];
 
@@ -117,6 +204,7 @@ function getEmployeeInfo() {
     let teamMember;
 }
 
+// prompt for the next team member
 getEmployeeInfo.prototype.nextMember = function() {
     inquirer
     .prompt({

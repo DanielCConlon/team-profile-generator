@@ -5,7 +5,8 @@ const generateTeamMembers = members => {
         <div class="card employee-card">
             <div class="card-header bg-primary text-white">
                 <h2 class="card-title">${manager.getName()}</h2>
-                <h3 class="card-title><i class="fa-solid fa-mug-hot"></i>${manager.getRole()}</h3>
+                <h3 class="card-title><i class="fab fa-black-tie"></i> ${manager.getRole()}</h3>
+                <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i> ${manager.getRole()}</h3>
             </div>
             <div class="card-body">
                 <ul class="list-group">
@@ -24,7 +25,7 @@ const generateTeamMembers = members => {
         <div class="card employee-card">
             <div class="card-header bg-primary text-white">
                 <h2 class="card-title">${engineer.getName()}</h2>
-                <h3 class="card-title><i class="fa-solid fa-glasses"></i>${engineer.getRole()}</h3>
+                <h3 class="card-title><i class="fas fa-glasses mr-2"></i> ${engineer.getRole()}</h3>
             </div>
             <div class="card-body">
                 <ul class="list-group">
@@ -43,7 +44,7 @@ const generateTeamMembers = members => {
         <div class="card employee-card">
             <div class="card-header bg-primary text-white">
                 <h2 class="card-title">${intern.getName()}</h2>
-                <h3 class="card-title><i class="fa-solid fa-user-graduate"></i>${intern.getRole()}</h3>
+                <h3 class="card-title><i class="fas fa-user-graduate mr-2"></i> ${intern.getRole()}</h3>
             </div>
             <div class="card-body">
                 <ul class="list-group">
@@ -93,9 +94,8 @@ return `
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Team Members</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+        />        <link rel="stylesheet" href="style.css">
         </head>
 
         <body>

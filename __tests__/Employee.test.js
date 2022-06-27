@@ -17,7 +17,7 @@ test("gets employee's name", () => {
 test("gets employee's id", () => {
     const employee = new Employee('testName', '1', 'test@test.com');
 
-    expect(employee.getId()).toBe('ID: 1');
+    expect(employee.getId()).toBe('1');
 })
 
 test("get employee's role", () => {

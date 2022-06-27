@@ -142,14 +142,13 @@ getEmployeeInfo.prototype.nextMember = function() {
                     this.getIntern();
                 }
                 else {
-                    console.log(teamMembers);
                     writeFile(teamMembers);
                 }
 
             });
 
         }
-        console.log('ending because no teammate added');
+        console.log('No Team members were added.');
         writeFile(teamMembers);
     })
 };
@@ -164,11 +163,11 @@ getEmployeeInfo.prototype.getManager = function() {
     })
 };
 
-getEmployeeInfo.prototype.getEngineer = function () {
+getEmployeeInfo.prototype.getEngineer = function() {
     inquirer
     .prompt(engineerQuestions)
     .then(({ name, id, email, github }) => {
-        this.teamMember = new Intern(name, id, email, github);
+        this.teamMember = new Engineer(name, id, email, github);
         teamMembers.push(this.teamMember);
         this.nextMember();
     })

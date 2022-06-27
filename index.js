@@ -1,9 +1,11 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
+
 const Employee = require('./lib/Employee');
+const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const Manager = require('./lib/Manager');
-const fs = require('fs');
+const generatePage = require('./src/page-template');
 
 const mockDataManager = {
         name: 'Bob',
@@ -27,8 +29,8 @@ const mockDataEngineer = {
 }
 
 
-
 let teamMembers = [];
+
 
 const managerQuestions = [
     {
@@ -111,97 +113,96 @@ const internQuestions = [
 ];
 
 // initializing the file
-function initApp() {
+function getEmployeeInfo() {
     let teamMember;
-    promptUser();
 }
 
-// function to start program
-function promptUser() {
-    // prompt user to fill in information
+getEmployeeInfo.prototype.nextMember = function() {
     inquirer
-        .prompt(managerQuestions)
-        // prompt the user which role the employee is to then have the corresponding questions asked
-        .then(({ name, id, email, officeNumber }) => {
-            this.teamMember = new Manager(name, id, email, officeNumber);
-            teamMembers.push(this.teamMember);
-            console.log(teamMember);
-            // prompt the user if they want to add a team member if yes go to next prompt, else no
+    .prompt({
+        type: 'confirm',
+        name: 'addTeamMember',
+        message: 'Do you want to add team members? '
+    })
+    // if they choose to add a team member they canadd an engineer or an intern to the team
+    .then(({ addTeamMember }) => {
+        if (addTeamMember) {
             inquirer
             .prompt({
-                type: 'confirm',
-                name: 'addTeamMember',
-                message: 'Do you want to add team members? '
+                type: 'list',
+                name: 'addMemberRole',
+                message: 'What role is your team member? ',
+                choices: ['Engineer', 'Intern']
             })
-            // if they choose to add a team member they canadd an engineer or an intern to the team
-            .then(({ addTeamMember }) => {
-                if (addTeamMember) {
-                    inquirer
-                    .prompt({
-                        type: 'list',
-                        name: 'addMemberRole',
-                        message: 'What role is your team member? ',
-                        choices: ['Engineer', 'Intern']
-                    })
-                    .then((addMemberResponse) => {
-                        if(addMemberResponse.addMemberRole === 'Engineer') {
-                            inquirer
-                            .prompt(engineerQuestions)
-                            .then(({ name, id, email, github }) => {
-                                this.teamMember = new Engineer(name, id, email, github);
-                                teamMembers.push(this.teamMember);
-                                console.log(teamMembers);
-                            })
-                        }
-                        if(addMemberResponse.addMemberRole === 'Intern') {
-                            inquirer
-                            .prompt(internQuestions)
-                            .then(({ name, id, email, school }) => {
-                                this.teamMember = new Intern(name, id, email, school);
-                                teamMembers.push(this.teamMember);
-                                console.log(teamMembers);
-                            })
-                        }
-                        writeFile(teamMembers);
-                    })
-
+            .then((addMemberResponse) => {
+                if(addMemberResponse.addMemberRole === 'Engineer') {
+                    this.getEngineer();
                 }
-                console.log('ending because no teammate added');
-                writeFile(teamMembers);
-            })
-        })
+                else if(addMemberResponse.addMemberRole === 'Intern') {
+                    this.getIntern();
+                }
+                else {
+                    console.log(teamMembers);
+                    writeFile(teamMembers);
+                }
 
+            });
+
+        }
+        console.log('ending because no teammate added');
+        writeFile(teamMembers);
+    })
+};
+
+getEmployeeInfo.prototype.getManager = function() {
+    inquirer
+    .prompt(managerQuestions)
+    .then(({ name, id, email, officeNumber }) => {
+        this.teamMember = new Manager(name, id, email, officeNumber);
+        teamMembers.push(this.teamMember);
+        this.nextMember();
+    })
+};
+
+getEmployeeInfo.prototype.getEngineer = function () {
+    inquirer
+    .prompt(engineerQuestions)
+    .then(({ name, id, email, github }) => {
+        this.teamMember = new Intern(name, id, email, github);
+        teamMembers.push(this.teamMember);
+        this.nextMember();
+    })
+};
+
+
+getEmployeeInfo.prototype.getIntern = function () {
+    inquirer
+    .prompt(internQuestions)
+    .then(({ name, id, email, school }) => {
+        this.teamMember = new Intern(name, id, email, school);
+        teamMembers.push(this.teamMember);
+        this.nextMember();
+    })
+};
+
+
+function writeFile() {
+    const pageHTML = generatePage(teamMembers);
+
+    fs.writeFile('./dist/index.html', pageHTML, err => {
+        if (err) {
+            console.log('Error: ' + err);
+        }
+        console.log('File created!');
+    });
+
+    fs.copyFile('./src/style.css', './dist/style.css', err => {
+        if (err) {
+            console.log('Error: ' + err);
+            return;
+        }
+        console.log('Stylesheet copied!');
+    })
 }
 
-const writeFile = fileContent => {
-    return new Promise((resolve, reject) => {
-        fs.writeFile('./dist/index.html', fileContent, err => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve({
-                ok: true,
-                message: 'File Created'
-            });
-        });
-    });
-};
-
-const copyFile = () => {
-    return new Promise((resolve, reject) => {
-        fs.copyFile('./src/style.css', './dist/style.css', err => {
-            if (err){
-                reject(err);
-                return;
-            }
-            resolve({
-                ok: true,
-                message: 'Stylesheet created'
-            });
-        });
-    });
-};
-
-
-initApp();
+new getEmployeeInfo().getManager();

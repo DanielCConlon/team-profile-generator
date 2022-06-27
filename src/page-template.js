@@ -1,6 +1,3 @@
-const Employee = require("../lib/Employee");
-const Engineer = require("../lib/Engineer");
-
 const generateTeamMembers = members => {
     // create html for manager
     const generateManager = manager => {
@@ -82,7 +79,8 @@ const generateTeamMembers = members => {
 
 }
 
-module.exports = members => {
+module.exports = (teamMembers) => {
+    const { manager, engineer, intern } = teamMembers;
 
 // HTML Page
 return `
@@ -94,6 +92,7 @@ return `
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Team Members</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
         <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
@@ -111,7 +110,7 @@ return `
             <div class="container">
                 <div class="row">
                     <div class="row col-12 d-flex justify-content-center">
-                        ${generateTeamMembers(members)}
+                        ${generateTeamMembers(teamMembers)}
                     </div>
                 </div>
             </div>

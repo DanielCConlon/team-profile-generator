@@ -32,4 +32,4 @@ https://danielcconlon.github.io/team-profile-generator/
 
 # Video demo
 
-https://watch.screencastify.com/v/YdpKAhietuZSFQLdVxDY
+https://watch.screencastify.com/v/8SUqYKGutZ6VL6zNzcrN

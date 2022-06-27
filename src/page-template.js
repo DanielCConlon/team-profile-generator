@@ -1,3 +1,4 @@
+const Employee = require("../lib/Employee");
 const Engineer = require("../lib/Engineer");
 
 const generateTeamMembers = members => {
@@ -58,8 +59,30 @@ const generateTeamMembers = members => {
         `;
     };
 
+    const page = [];
+
+    page.push(members
+        .filter(employee => employee.getRole() === "Manager")
+        .map(manager => generateManager(manager))
+    );
+
+    page.push(members
+        .filter(employee => employee.getRole() === "Engineer")
+        .map(engineer => generateEngineer(engineer))
+        .join("")
+    );
+
+    page.push(members
+        .filter(employee => employee.getRole() === "Intern")
+        .map(intern => generateIntern(intern))
+        .join("")
+    );
+
+    return page.join("");
 
 }
+
+module.exports = members => {
 
 // HTML Page
 return `
@@ -84,14 +107,18 @@ return `
                     </div>
                 </div>
             </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="row col-12 d-flex justify-content-center">
+                        ${generateTeamMembers(members)}
+                    </div>
+                </div>
+            </div>
         </body>
     </html>
     `;
 
 
-
-
-
-module.exports = templateData => {
 
 };
